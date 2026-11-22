@@ -224,7 +224,10 @@ sudo apt-get install trivy -y
   ```
   - <b>Apply argocd manifest</b>
   ```bash
+  # Apply the Argo CD manifest using client-side apply (showing any issue use server-side instead of client-side)
   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  # Apply the Argo CD manifest using server-side apply
+  kubectl apply --server-side --force-conflicts -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   ```
   - <b>Make sure all pods are running in argocd namespace</b>
   ```bash

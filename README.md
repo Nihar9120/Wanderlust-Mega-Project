@@ -303,6 +303,7 @@ sudo apt-get install trivy -y
   - SonarQube Scanner
   - Docker
   - Pipeline: Stage View
+  - Blue Ocean
 #
 - <b id="Owasp">Configure OWASP, move to <mark>Manage Jenkins --> Plugins --> Available plugins</mark> (Jenkins Worker)</b>
 ![image](https://github.com/user-attachments/assets/da6a26d3-f742-4ea8-86b7-107b1650a7c2)

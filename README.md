@@ -124,7 +124,7 @@ sudo apt-get install jenkins -y
   ```bash
   eksctl create cluster --name=wanderlust \
                       --region=ap-south-1 \
-                      --version=1.31 \
+                      --version=1.35 \
                       --without-nodegroup
   ```
   - <b>Associate IAM OIDC Provider (Master machine)</b>

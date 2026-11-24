@@ -53,27 +53,42 @@ pipeline {
             }
         }
         
-        stage("Git: Code update and push to GitHub"){
-            steps{
-                script{
-                    withCredentials([gitUsernamePassword(credentialsId: 'Github-cred', gitToolName: 'Default')]) {
-                        sh '''
-                        echo "Checking repository status: "
-                        git status
-                    
-                        echo "Adding changes to git: "
-                        git add .
-                        
-                        echo "Commiting changes: "
+        
+stage("Git: Code update and push to GitHub") {
+    steps {
+        script {
+            withCredentials([
+                gitUsernamePassword(
+                    credentialsId: 'Github-cred',
+                    gitToolName: 'Default'
+                )
+            ]) {
+                sh '''
+                    echo "Configuring Git identity..."
+                    git config user.name "Nihar Ranjan Pradhan"
+                    git config user.email "niharranjanpradhan5799@gmail.com"
+
+                    echo "Checking repository status..."
+                    git status
+
+                    echo "Adding changes..."
+                    git add kubernetes/backend.yaml kubernetes/frontend.yaml
+
+                    echo "Committing changes..."
+                    if ! git diff --cached --quiet; then
                         git commit -m "Updated environment variables"
-                        
-                        echo "Pushing changes to github: "
-                        git push https://github.com/Nihar9120/Wanderlust-Mega-Project.git main
-                    '''
-                    }
-                }
+                    else
+                        echo "No changes to commit."
+                    fi
+
+                    echo "Pushing changes to GitHub..."
+                    git push https://github.com/Nihar9120/Wanderlust-Mega-Project.git HEAD:main
+                '''
             }
         }
+    }
+}
+
     }
   post {
         success {
